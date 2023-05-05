@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "420899749290",
+    "project_id": "wattify-ce140",
+    "storage_bucket": "wattify-ce140.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420899749290:android:630938acd4dcf31cde7fd3",
+        "android_client_info": {
+          "package_name": "com.example.wattify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420899749290-rrcul61roiikmfbfaq244r2ugcvv8kn2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfOs9JnsFokVixUy7BZmSf3i3jb14t82E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420899749290-rrcul61roiikmfbfaq244r2ugcvv8kn2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
