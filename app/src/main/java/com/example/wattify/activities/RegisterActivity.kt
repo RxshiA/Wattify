@@ -2,18 +2,19 @@ package com.example.wattify.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wattify.R
+import com.example.wattify.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
 
+    private lateinit var nameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var registerButton: Button
@@ -25,18 +26,20 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         mAuth = FirebaseAuth.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference.child("users")
+        mDatabase = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("users")
 
+        nameEditText = findViewById(R.id.register_name)
         emailEditText = findViewById(R.id.register_email)
         passwordEditText = findViewById(R.id.register_password)
         registerButton = findViewById(R.id.register_button)
 
         registerButton.setOnClickListener {
+            val name = nameEditText.text.toString()
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
-            if (email.isBlank() || password.isBlank()) {
-                Toast.makeText(this, "Please fill in both email and password fields", Toast.LENGTH_SHORT).show()
+            if (name.isBlank() || email.isBlank() || password.isBlank()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -45,10 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val currentUser = mAuth.currentUser
                         val userId = currentUser?.uid ?: ""
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                        val user = User(userId, email,password)
+                        val user = User(userId, name, email,password)
 
                         mDatabase.child(userId).setValue(user)
                             .addOnSuccessListener {
@@ -66,4 +66,3 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 }
-
