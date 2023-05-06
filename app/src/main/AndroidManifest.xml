@@ -34,6 +34,7 @@
         <activity android:name=".activities.FetchPlans" />
         <activity android:name=".activities.PlanHome" />
         <activity android:name=".activities.PlanDetails" />
+        <activity android:name=".activities.BillSummary" />
     </application>
 
 </manifest>

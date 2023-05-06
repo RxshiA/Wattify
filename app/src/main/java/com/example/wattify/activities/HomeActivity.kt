@@ -36,10 +36,10 @@ class HomeActivity : AppCompatActivity(){
 //            startActivity(intent)
 //        }
 //
-//        btnBillSum.setOnClickListener {
-//            val intent = Intent(this, FetchingActivity::class.java)
-//            startActivity(intent)
-//        }
+        btnBillSum.setOnClickListener {
+            val intent = Intent(this, BillSummary::class.java)
+            startActivity(intent)
+        }
 
     }
 }
