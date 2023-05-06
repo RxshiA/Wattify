@@ -2,7 +2,6 @@ package com.example.wattify.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -45,14 +44,14 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val currentUser = mAuth.currentUser
                         val userId = currentUser?.uid ?: ""
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, DevHomeActivity::class.java)
                         startActivity(intent)
                         finish()
                         val user = User(userId, email,password)
 
                         mDatabase.child(userId).setValue(user)
                             .addOnSuccessListener {
-                                val intent = Intent(this, MainActivity::class.java)
+                                val intent = Intent(this, DevHomeActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }
