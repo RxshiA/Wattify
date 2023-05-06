@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/nav_devices"
+        android:icon="@drawable/baseline_chrome_reader_mode_24"
+        android:title="Devices"/>
+
+    <item
+        android:id="@+id/nav_plan"
+        android:icon="@drawable/baseline_edit_24"
+        android:title="Plans"/>
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/baseline_key_24"
+        android:title="My Profile"/>
+
+
+
+    <item android:title="Wattify">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/baseline_logout_24"
+                android:title="LogOut" />
+
+        </menu>
+
+    </item>
+
+
+
+
+</menu>
