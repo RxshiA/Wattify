@@ -10,21 +10,20 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.wattify.R
 import com.google.android.material.navigation.NavigationView
 
-class DevHomeActivity : AppCompatActivity() {
+class PlanHome : AppCompatActivity() {
     private lateinit var btnInsertData: Button
     private lateinit var btnFetchData: Button
     lateinit var toogle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dev_home)
+        setContentView(R.layout.activity_plan_home)
 
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
         val intent1 = Intent(this, HomeActivity::class.java)
         val intent2 = Intent(this, DevHomeActivity::class.java)
         val intent3 = Intent(this, PlanHome::class.java)
-//        val intent3 = Intent(this, EditJobApplications::class.java)
 //        val intent4 = Intent(this, DeleteApplication::class.java)
         val intent5 = Intent(this, LoginActivity::class.java)
 
@@ -51,12 +50,12 @@ class DevHomeActivity : AppCompatActivity() {
         btnFetchData = findViewById(R.id.btnFetchData)
 
         btnInsertData.setOnClickListener {
-            val intent = Intent(this, InsertionActivity::class.java)
+            val intent = Intent(this, addMyPlan::class.java)
             startActivity(intent)
         }
 
         btnFetchData.setOnClickListener {
-            val intent = Intent(this, FetchingActivity::class.java)
+            val intent = Intent(this, FetchPlans::class.java)
             startActivity(intent)
         }
 
