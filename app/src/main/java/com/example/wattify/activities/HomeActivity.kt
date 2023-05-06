@@ -27,19 +27,19 @@ class HomeActivity : AppCompatActivity(){
         }
 
 //        btnPlans.setOnClickListener {
-//            val intent = Intent(this, FetchingActivity::class.java)
+//            val intent = Intent(this, Usage::class.java)
 //            startActivity(intent)
 //        }
 //
-//        btnUsage.setOnClickListener {
-//            val intent = Intent(this, FetchingActivity::class.java)
-//            startActivity(intent)
-//        }
+        btnUsage.setOnClickListener {
+            val intent = Intent(this, Usage::class.java)
+            startActivity(intent)
+        }
 //
-//        btnBillSum.setOnClickListener {
-//            val intent = Intent(this, FetchingActivity::class.java)
-//            startActivity(intent)
-//        }
+        btnBillSum.setOnClickListener {
+            val intent = Intent(this, BillSummary::class.java)
+            startActivity(intent)
+        }
 
     }
 }
