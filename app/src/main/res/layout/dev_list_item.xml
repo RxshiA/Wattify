@@ -25,7 +25,7 @@
                 android:id="@+id/tvDevName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dev Name"
+                android:text="@string/dev_name"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="@color/black"

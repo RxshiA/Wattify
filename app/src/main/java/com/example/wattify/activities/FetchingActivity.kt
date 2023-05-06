@@ -65,6 +65,8 @@ class FetchingActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
 
+                        
+
                     })
 
                     devRecyclerView.visibility = View.VISIBLE
