@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wattify.R
 import com.example.wattify.adapters.DevAdapter
 import com.example.wattify.models.DeviceModel
 import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FetchingActivity : AppCompatActivity() {
 
@@ -18,6 +21,9 @@ class FetchingActivity : AppCompatActivity() {
     private lateinit var tvLoadingData: TextView
     private lateinit var devList: ArrayList<DeviceModel>
     private lateinit var dbRef: DatabaseReference
+
+    private lateinit var searchView: SearchView
+    private lateinit var searchList: ArrayList<DeviceModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +34,37 @@ class FetchingActivity : AppCompatActivity() {
         devRecyclerView.setHasFixedSize(true)
         tvLoadingData = findViewById(R.id.tvLoadingData)
 
+        searchView = findViewById(R.id.search)
         devList = arrayListOf<DeviceModel>()
+        searchList = arrayListOf<DeviceModel>()
 
         getDevicesData()
+
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchList.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()){
+                    devList.forEach{
+                        if (it.devName?.toLowerCase(Locale.getDefault())!!.contains(searchText)) {
+                            searchList.add(it)
+                        }
+                    }
+                    devRecyclerView.adapter!!.notifyDataSetChanged()
+                } else {
+                    searchList.clear()
+                    searchList.addAll(devList)
+                    devRecyclerView.adapter!!.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
 
     }
 
@@ -49,7 +83,8 @@ class FetchingActivity : AppCompatActivity() {
                         val devData = devSnap.getValue(DeviceModel::class.java)
                         devList.add(devData!!)
                     }
-                    val mAdapter = DevAdapter(devList)
+                    searchList.addAll(devList)
+                    val mAdapter = DevAdapter(searchList)
                     devRecyclerView.adapter = mAdapter
 
                     mAdapter.setOnItemClickListener(object : DevAdapter.onItemClickListener{
@@ -58,10 +93,10 @@ class FetchingActivity : AppCompatActivity() {
                             val intent = Intent(this@FetchingActivity, DeviceDetailsActivity::class.java)
 
                             //put extras
-                            intent.putExtra("devId", devList[position].devId)
-                            intent.putExtra("devName", devList[position].devName)
-                            intent.putExtra("devWatts", devList[position].devWatts)
-                            intent.putExtra("devType", devList[position].devType)
+                            intent.putExtra("devId", searchList[position].devId)
+                            intent.putExtra("devName", searchList[position].devName)
+                            intent.putExtra("devWatts", searchList[position].devWatts)
+                            intent.putExtra("devType", searchList[position].devType)
                             startActivity(intent)
                         }
 

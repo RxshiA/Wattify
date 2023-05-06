@@ -4,60 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/dvBackground1"
     tools:context=".activities.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Firebase Realtime  App in Kotlin"
-        android:layout_marginTop="80dp"
-        android:textSize="28sp"
-        android:gravity="center"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/iv_note"
+        android:layout_width="456dp"
+        android:layout_height="416dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnInsertData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="insert Data"
-        android:layout_marginTop="75dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/btnFetchData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:text="Fetch Data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnInsertData" />
-
-    <Button
-        android:id="@+id/btnInsertPlans"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="insert Plans"
-        android:layout_marginTop="75dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFetchData" />
-
-    <Button
-        android:id="@+id/btnFetchPlans"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:text="Fetch Plans"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnInsertPlans" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
