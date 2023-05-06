@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Firebase Realtime Database App in Kotlin"
+        android:text="Firebase Realtime  App in Kotlin"
         android:layout_marginTop="80dp"
         android:textSize="28sp"
         android:gravity="center"
@@ -38,5 +38,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnInsertData" />
+
+    <Button
+        android:id="@+id/btnInsertPlans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="insert Plans"
+        android:layout_marginTop="75dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFetchData" />
+
+    <Button
+        android:id="@+id/btnFetchPlans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="Fetch Plans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInsertPlans" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.widget.Button
 import com.example.wattify.R
 
+
 class MainActivity : AppCompatActivity() {
+
     private lateinit var btnInsertData: Button
     private lateinit var btnFetchData: Button
+    private lateinit var btnInsertPlans: Button
+    private lateinit var btnFetchPlans: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
         btnInsertData = findViewById(R.id.btnInsertData)
         btnFetchData = findViewById(R.id.btnFetchData)
+        btnInsertPlans = findViewById(R.id.btnInsertPlans)
+        btnFetchPlans = findViewById(R.id.btnFetchPlans)
 
         btnInsertData.setOnClickListener {
             val intent = Intent(this, InsertionActivity::class.java)
@@ -24,6 +30,17 @@ class MainActivity : AppCompatActivity() {
 
         btnFetchData.setOnClickListener {
             val intent = Intent(this, FetchingActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        btnInsertPlans.setOnClickListener {
+            val intent = Intent(this, addMyPlan::class.java)
+            startActivity(intent)
+        }
+
+        btnFetchPlans.setOnClickListener {
+            val intent = Intent(this, FetchPlans::class.java)
             startActivity(intent)
         }
 

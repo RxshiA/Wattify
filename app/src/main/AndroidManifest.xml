@@ -26,6 +26,8 @@
         <activity android:name=".activities.DeviceDetailsActivity"/>
         <activity android:name=".activities.LoginActivity"/>
         <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.addMyPlan" />
+        <activity android:name=".activities.FetchPlans" />
 
     </application>
 
