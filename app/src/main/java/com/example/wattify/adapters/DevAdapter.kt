@@ -19,6 +19,8 @@ class DevAdapter(private val devList: ArrayList<DeviceModel>) :
         fun setOnItemClickListener(clickListener: onItemClickListener){
             mListener = clickListener
         }
+
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView = LayoutInflater.from(parent.context).inflate(R.layout.dev_list_item, parent, false)
             return ViewHolder(itemView, mListener)
@@ -33,7 +35,7 @@ class DevAdapter(private val devList: ArrayList<DeviceModel>) :
             return devList.size
         }
 
-        class ViewHolder(itemView: View, clickListener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
+        class ViewHolder(itemView: View, clickListener: DevAdapter.onItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
             val tvDevName : TextView = itemView.findViewById(R.id.tvDevName)
 

@@ -6,6 +6,24 @@
     <string name="type_your_pass">Type Your Password</string>
     <string name="retype_your_pass">Retype Your Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="insert_data">insert Data</string>
+    <string name="fetch_data">Fetch Data</string>
+    <string name="usage">Usage</string>
+    <string name="loading_data">Loading Data.....</string>
+    <string name="device_name">Device Name</string>
+    <string name="number_of_watts">Number of Watts</string>
+    <string name="time_usage">Time</string>
+    <string name="save_usage" >Save</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="dev_id">Dev id</string>
+    <string name="item_1">Item 1</string>
+    <string name="dev_name">Dev Name</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="add_devices">Add Devices</string>
+    <string name="current_devices">Current Devices</string>
+    <string name="my_devices">My Devices</string>
+    <string name="units">Units</string>
+    <string name="currency_format">Rs. %,.2f</string>
 </resources>

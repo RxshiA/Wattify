@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/dvBackground1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bill Summary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:background="@color/dvBackground1"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
+
+    <!-- Units section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/units"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/dvBackground2"/>
+
+    <EditText
+        android:id="@+id/unitsInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter units here"
+        android:inputType="number"
+        android:padding="8dp"
+        android:textColor="@color/dvBackground2"
+        android:background="@color/dvBackground5"
+        android:drawableTint="@color/dvBackground2"
+        android:drawableStart="@drawable/baseline_edit_24"/>
+
+    <!-- Horizontal line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/dvBackground3"/>
+
+    <!-- Usage section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Usage"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/dvBackground2"/>
+
+    <TextView
+        android:id="@+id/usageOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:textColor="@color/dvBackground2"
+        android:background="@color/dvBackground5"/>
+
+    <!-- Horizontal line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/dvBackground3" />
+
+    <!-- Fixed charges section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fixed Charges"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/dvBackground2" />
+
+    <TextView
+        android:id="@+id/fixedChargesOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:textColor="@color/dvBackground2"
+        android:background="@color/dvBackground5"/>
+
+    <!-- Horizontal line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/dvBackground3" />
+
+    <!-- Total charge section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Charge"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/dvBackground2"
+        android:background="@color/dvBackground5"/>
+
+    <TextView
+        android:id="@+id/totalChargeOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:background="@color/dvBackground5"/>
+
+</LinearLayout>
