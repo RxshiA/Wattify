@@ -29,7 +29,7 @@ class DevHomeActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toogle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+       // toogle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toogle)
         toogle.syncState()
 
@@ -69,3 +69,4 @@ class DevHomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
+

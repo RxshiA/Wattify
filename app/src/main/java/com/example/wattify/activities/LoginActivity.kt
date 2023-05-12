@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wattify.R
@@ -17,16 +18,17 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var mAuth: FirebaseAuth
-
+    private lateinit var registerTextView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        mAuth = FirebaseAuth.getInstance()
 
+        mAuth = FirebaseAuth.getInstance()
         emailEditText = findViewById(R.id.login_email)
         passwordEditText = findViewById(R.id.login_password)
         loginButton = findViewById(R.id.login_button)
+        registerTextView = findViewById(R.id.register_text)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
@@ -53,6 +55,10 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 }
+        }
+        registerTextView.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 }

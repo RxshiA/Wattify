@@ -11,6 +11,7 @@ class HomeActivity : AppCompatActivity(){
     private lateinit var btnPlans: Button
     private lateinit var btnUsage: Button
     private lateinit var btnBillSum: Button
+    private lateinit var btnProfile: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,7 @@ class HomeActivity : AppCompatActivity(){
         btnPlans = findViewById(R.id.btnPlans)
         btnUsage = findViewById(R.id.btnUsage)
         btnBillSum = findViewById(R.id.btnBillSum)
+        btnProfile = findViewById(R.id.btnProfile)
 
         btnDevices.setOnClickListener {
             val intent = Intent(this, DevHomeActivity::class.java)
@@ -40,6 +42,10 @@ class HomeActivity : AppCompatActivity(){
 //            val intent = Intent(this, FetchingActivity::class.java)
 //            startActivity(intent)
 //        }
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            }
 
     }
 }
