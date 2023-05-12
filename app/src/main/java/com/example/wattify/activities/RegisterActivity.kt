@@ -52,7 +52,8 @@ class RegisterActivity : AppCompatActivity() {
 
                         mDatabase.child(userId).setValue(user)
                             .addOnSuccessListener {
-                                val intent = Intent(this, DevHomeActivity::class.java)
+                                Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this, LoginActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }
