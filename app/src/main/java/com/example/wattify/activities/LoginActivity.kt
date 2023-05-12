@@ -17,18 +17,19 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
+    private lateinit var registerText: TextView
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var registerTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
         mAuth = FirebaseAuth.getInstance()
+
         emailEditText = findViewById(R.id.login_email)
         passwordEditText = findViewById(R.id.login_password)
         loginButton = findViewById(R.id.login_button)
-        registerTextView = findViewById(R.id.register_text)
+        registerText = findViewById(R.id.register_text)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
@@ -56,7 +57,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
         }
-        registerTextView.setOnClickListener {
+
+        registerText.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }

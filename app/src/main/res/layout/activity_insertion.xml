@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/background_gradient1"
     tools:context=".activities.InsertionActivity">
 
     <EditText
@@ -15,6 +16,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Device name"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +30,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Number of Watts"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDevName" />
@@ -39,6 +44,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Device Type"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDevWatts" />
@@ -49,6 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Save Data"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/dvBackground3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDevType" />
