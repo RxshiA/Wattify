@@ -26,10 +26,11 @@ class HomeActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
-//        btnPlans.setOnClickListener {
-//            val intent = Intent(this, FetchingActivity::class.java)
-//            startActivity(intent)
-//        }
+        btnUsage.setOnClickListener {
+            val intent = Intent(this, Usage::class.java)
+            startActivity(intent)
+        }
+
 //
 //        btnUsage.setOnClickListener {
 //            val intent = Intent(this, FetchingActivity::class.java)

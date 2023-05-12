@@ -18,5 +18,8 @@
     <string name="delete">Delete</string>
     <string name="dev_id">Dev id</string>
     <string name="item_1">Item 1</string>
-    <string name="dev_name">Dev Name</string>string>
+    <string name="dev_name">Dev Name</string>
+    <string name="open" />
+    <string name="close" />string>
+    <string name="delete_usage">Delete</string>
 </resources>
