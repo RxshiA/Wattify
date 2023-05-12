@@ -26,4 +26,5 @@
     <string name="my_devices">My Devices</string>
     <string name="units">Units</string>
     <string name="currency_format">Rs. %,.2f</string>
+    <string name="delete_usage">Delete</string>
 </resources>
