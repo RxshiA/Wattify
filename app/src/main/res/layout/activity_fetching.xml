@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient1"
     tools:context=".activities.FetchingActivity">
 
     <androidx.appcompat.widget.SearchView
@@ -17,6 +18,9 @@
         app:searchHintIcon="@null"
         app:queryHint="Search..."
         android:focusable="false"
+        android:background="@drawable/button_bg"
+        android:backgroundTint="#D8BD8B"
+        android:queryBackground="@android:color/transparent"
         app:closeIcon="@drawable/baseline_clear_24"
         app:searchIcon="@drawable/baseline_search_24"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +32,7 @@
         android:id="@+id/rvDev"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#CDC4D8"
         app:layout_constraintTop_toBottomOf="@id/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="Loading Data....."
         android:textSize="28sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

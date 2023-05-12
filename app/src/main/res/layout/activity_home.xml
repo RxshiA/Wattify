@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dvBackground1"
+    android:background="@drawable/background_gradient1"
     tools:context=".activities.HomeActivity">
 
     <TextView
@@ -112,6 +112,14 @@
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_bg"
+            android:text="My Profile"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 

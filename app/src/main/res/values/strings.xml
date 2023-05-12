@@ -19,7 +19,11 @@
     <string name="dev_id">Dev id</string>
     <string name="item_1">Item 1</string>
     <string name="dev_name">Dev Name</string>
-    <string name="open" />
-    <string name="close" />string>
-    <string name="delete_usage">Delete</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="add_devices">Add Devices</string>
+    <string name="current_devices">Current Devices</string>
+    <string name="my_devices">My Devices</string>
+    <string name="units">Units</string>
+    <string name="currency_format">Rs. %,.2f</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wattify.R
@@ -16,22 +17,27 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
+    private lateinit var nameEditText: EditText
     private lateinit var registerButton: Button
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
+    private lateinit var loginTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         mAuth = FirebaseAuth.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference.child("users")
-
+        mDatabase = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("users")
+        nameEditText = findViewById(R.id.register_name)
         emailEditText = findViewById(R.id.register_email)
         passwordEditText = findViewById(R.id.register_password)
         registerButton = findViewById(R.id.register_button)
+        loginTextView = findViewById(R.id.login_text)
+
 
         registerButton.setOnClickListener {
+            val name = nameEditText.text.toString()
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
@@ -45,14 +51,14 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val currentUser = mAuth.currentUser
                         val userId = currentUser?.uid ?: ""
-                        val intent = Intent(this, DevHomeActivity::class.java)
+                        val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
-                        val user = User(userId, email,password)
+                        val user = User(userId,name, email,password)
 
                         mDatabase.child(userId).setValue(user)
                             .addOnSuccessListener {
-                                val intent = Intent(this, DevHomeActivity::class.java)
+                                val intent = Intent(this, LoginActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }
@@ -63,6 +69,10 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show()
                     }
                 }
+        }
+        loginTextView.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 }

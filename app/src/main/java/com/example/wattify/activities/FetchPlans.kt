@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wattify.R
+import com.example.wattify.adapters.DevAdapter
 import com.example.wattify.adapters.PlanAdapter
 import com.example.wattify.models.PlanModel
 import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FetchPlans : AppCompatActivity() {
 
@@ -18,6 +22,9 @@ class FetchPlans : AppCompatActivity() {
     private lateinit var tvLoadingPlans: TextView
     private lateinit var planList:ArrayList<PlanModel>
     private lateinit var dbRef:DatabaseReference
+
+    private lateinit var searchView: SearchView
+    private lateinit var searchList: ArrayList<PlanModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +35,39 @@ class FetchPlans : AppCompatActivity() {
         planRecylcleView.setHasFixedSize(true)
         tvLoadingPlans=findViewById(R.id.tvLoadingPlan)
 
+        searchView = findViewById(R.id.search)
         planList= arrayListOf<PlanModel>()
+        searchList = arrayListOf<PlanModel>()
 
         getPlanData()
+
+        searchView.clearFocus()
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchList.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()){
+                    planList.forEach{
+                        if (it.planName?.toLowerCase(Locale.getDefault())!!.contains(searchText)) {
+                            searchList.add(it)
+                        }
+                    }
+                    planRecylcleView.adapter?.notifyDataSetChanged()
+                } else {
+                    searchList.clear()
+                    searchList.addAll(planList)
+                    planRecylcleView.adapter!!.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
+
     }
 
     private fun getPlanData(){
@@ -49,16 +86,17 @@ class FetchPlans : AppCompatActivity() {
                         planList.add(planData!!)
                     }
 
-                    val planAdpater=PlanAdapter(planList)
-                    planRecylcleView.adapter=planAdpater
+                    searchList.addAll(planList)
+                    val mAdapter = PlanAdapter(searchList)
+                    planRecylcleView.adapter = mAdapter
 
-                    planAdpater.setOnItemClickListener(object :PlanAdapter.onItemClickListener{
+                    mAdapter.setOnItemClickListener(object :PlanAdapter.onItemClickListener{
                         override fun onItemClick(position: Int) {
                             val intent =Intent(this@FetchPlans, PlanDetails::class.java)
 
 
-                            intent.putExtra("planId",planList[position].planId)
-                            intent.putExtra("planName",planList[position].planName)
+                            intent.putExtra("planId",searchList[position].planId)
+                            intent.putExtra("planName",searchList[position].planName)
                             startActivity(intent)
                         }
 
