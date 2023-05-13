@@ -33,6 +33,8 @@
         <activity android:name=".activities.EditActivity"/>
         <activity android:name=".activities.Usage" />
         <activity android:name=".activities.BillSummary"/>
+        <activity android:name=".activities.PlanHome"/>
+        <activity android:name=".activities.PlanDetails"/>
 
     </application>
 

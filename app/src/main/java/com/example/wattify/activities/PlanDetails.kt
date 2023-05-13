@@ -35,7 +35,6 @@ class PlanDetails : AppCompatActivity() {
             )
         }
 
-
     }
 
       private fun initView(){
