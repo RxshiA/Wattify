@@ -27,7 +27,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/dvBackground3"
         android:text="@string/save_usage" />
+
+    <Button
+        android:id="@+id/btnDeleteData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/dvBackground3"
+        android:text="@string/delete_usage" />
 
 
 </LinearLayout>
