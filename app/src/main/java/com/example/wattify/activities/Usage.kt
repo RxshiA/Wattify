@@ -50,7 +50,7 @@ class Usage : AppCompatActivity() {
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
         val intent1 = Intent(this, HomeActivity::class.java)
-        val intent2 = Intent(this, DevHomeActivity::class.java)
+        val intent2 = Intent(this, FetchingActivity::class.java)
 //        val intent3 = Intent(this, EditJobApplications::class.java)
 //        val intent4 = Intent(this, DeleteApplication::class.java)
         val intent5 = Intent(this, LoginActivity::class.java)
