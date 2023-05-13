@@ -1,6 +1,7 @@
 package com.example.wattify.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -61,10 +62,9 @@ class InsertionActivity : AppCompatActivity(){
             .addOnCompleteListener {
                 Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
 
-                etDevName.text.clear()
-                etDevWatts.text.clear()
-                etDevType.text.clear()
-
+                val intent = Intent(this, FetchingActivity::class.java)
+                startActivity(intent)
+                finish()
 
             }.addOnFailureListener { err ->
                 Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()

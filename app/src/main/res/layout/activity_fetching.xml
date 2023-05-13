@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient1"
-    tools:context=".activities.DevHomeActivity">
+    tools:context=".activities.FetchingActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -47,7 +47,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDev"
         android:layout_width="416dp"
-        android:layout_height="485dp"
+        android:layout_height="528dp"
         android:background="#CDC4D8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
