@@ -82,8 +82,11 @@ class FetchPlans : AppCompatActivity() {
                 if(snapshot.exists()){
                     for(planSnap in snapshot.children){
 
+
+
                         val planData=planSnap.getValue(PlanModel::class.java)
                         planList.add(planData!!)
+
                     }
 
                     searchList.addAll(planList)

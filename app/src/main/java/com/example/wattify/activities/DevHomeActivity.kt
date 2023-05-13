@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.wattify.R
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 
 class DevHomeActivity : AppCompatActivity() {
@@ -23,14 +24,14 @@ class DevHomeActivity : AppCompatActivity() {
         val navView : NavigationView = findViewById(R.id.nav_view)
         val intent1 = Intent(this, HomeActivity::class.java)
         val intent2 = Intent(this, DevHomeActivity::class.java)
-        val intent3 = Intent(this, PlanHome::class.java)
-//        val intent3 = Intent(this, EditJobApplications::class.java)
-//        val intent4 = Intent(this, DeleteApplication::class.java)
+//        val intent3 = Intent(this, PlanHome::class.java)
+        val intent4 = Intent(this, ProfileActivity::class.java)
         val intent5 = Intent(this, LoginActivity::class.java)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-       // toogle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        toogle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toogle)
         toogle.syncState()
 
@@ -39,8 +40,8 @@ class DevHomeActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.nav_home -> startActivity(intent1)
                 R.id.nav_devices -> startActivity(intent2)
-                R.id.nav_plan -> startActivity(intent3)
-//                R.id.nav_profile -> startActivity(intent4)
+//                R.id.nav_plan -> startActivity(intent3)
+                R.id.nav_profile -> startActivity(intent4)
                 R.id.nav_logout -> startActivity(intent5)
             }
 
