@@ -7,12 +7,33 @@
     android:background="@drawable/background_gradient1"
     tools:context=".activities.HomeActivity">
 
+
+    <ImageView
+        android:id="@+id/userLogoImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/user" />
+
+    <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/userLogoImageView"
+        tools:text="John Doe" />
+
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="sans-serif-light"
         android:text="Hi! Welcome"
         android:textColor="@color/white"
@@ -112,14 +133,6 @@
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
-        <Button
-            android:id="@+id/btnProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_bg"
-            android:text="My Profile"
-            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
