@@ -72,7 +72,7 @@ class PlanDetails : AppCompatActivity() {
         etPlanName.setText(intent.getStringExtra("planName").toString())
 
 
-        mDialog.setTitle("Updating $planName Record")
+        mDialog.setTitle("Updating $planName")
 
         val alertDialog = mDialog.create()
         alertDialog.show()
