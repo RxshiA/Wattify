@@ -1,5 +1,6 @@
 package com.example.wattify.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -32,6 +33,12 @@ class PlanDetails : AppCompatActivity() {
             openUpdateDialog(
                 intent.getStringExtra("planId").toString(),
                 intent.getStringExtra("planName").toString()
+            )
+        }
+
+        btnDelete.setOnClickListener {
+            deleteRecord(
+                intent.getStringExtra("planId").toString()
             )
         }
 
@@ -100,6 +107,24 @@ class PlanDetails : AppCompatActivity() {
         val dbRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("X").child(id)
         val planInfo = PlanModel(id, name)
         dbRef.setValue(planInfo)
+    }
+
+
+    private fun deleteRecord(
+        id: String
+    ){
+        val dbRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("X").child(id)
+        val mTask = dbRef.removeValue()
+
+        mTask.addOnSuccessListener {
+            Toast.makeText(this, "Plan Deleted", Toast.LENGTH_LONG).show()
+
+            val intent = Intent(this, FetchPlans::class.java)
+            finish()
+            startActivity(intent)
+        }.addOnFailureListener{ error ->
+            Toast.makeText(this, "Deleting Err ${error.message}", Toast.LENGTH_LONG).show()
+        }
     }
 }
 

@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity(){
         }
 
         btnPlans.setOnClickListener {
-            val intent = Intent(this, PlanHome::class.java)
+            val intent = Intent(this, FetchPlans::class.java)
             startActivity(intent)
         }
 

@@ -1,6 +1,7 @@
 package com.example.wattify.activities
 
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -69,10 +70,10 @@ class ProfileActivity : AppCompatActivity() {
             isPasswordVisible = !isPasswordVisible
             if (isPasswordVisible) {
                 passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                togglePasswordImageView.setImageResource(R.drawable.ic_password_visible)
+                togglePasswordImageView.setImageResource(R.drawable.ic_eye_24)
             } else {
                 passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-                togglePasswordImageView.setImageResource(R.drawable.ic_password_hidden)
+                togglePasswordImageView.setImageResource(R.drawable.ic_eye_off)
             }
         }
 
