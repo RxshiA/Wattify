@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -161,6 +163,8 @@ class Usage : AppCompatActivity() {
 
         val etDevTime = mDialogView.findViewById<EditText>(R.id.svTime)
         val etDevWatts = mDialogView.findViewById<EditText>(R.id.svWatts)
+        val totWatts = mDialogView.findViewById<EditText>(R.id.totWatts)
+        totWatts.isEnabled = false
 
         val btnSaveData = mDialogView.findViewById<Button>(R.id.btnSaveData)
         val btnDeleteData = mDialogView.findViewById<Button>(R.id.btnDeleteData)
@@ -213,6 +217,39 @@ class Usage : AppCompatActivity() {
                 }
                 etDevWatts.setText(devWatts)
                 etDevWatts.isEnabled = false
+
+                if(etDevTime.text.toString().isNotEmpty()){
+                    val totalWatts = etDevTime.text.toString().toInt() * etDevWatts.text.toString().toInt()
+                    totWatts.text = Editable.Factory.getInstance().newEditable(totalWatts.toString())
+                }
+
+
+
+
+                etDevTime.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {}
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {}
+
+                    override fun afterTextChanged(s: Editable?) {
+                        val hrs = s?.toString()?.toIntOrNull() ?: 0
+
+                        val totalWatts = hrs * etDevWatts.text.toString().toInt()
+
+                        totWatts.text = Editable.Factory.getInstance().newEditable(totalWatts.toString())
+                    }
+                })
+
 
             }
 
@@ -309,7 +346,7 @@ class Usage : AppCompatActivity() {
         user?.let{
             userDevId = it.uid + id + currentDate
         }
-        val dbRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("UserDevices/$userDevId").child(id)
+        val dbRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("UserDevices/$userDevId")
         val mTask = dbRef.removeValue()
 
         mTask.addOnSuccessListener {

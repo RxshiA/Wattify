@@ -27,4 +27,5 @@
     <string name="units">Units</string>
     <string name="currency_format">Rs. %,.2f</string>
     <string name="delete_usage">Delete</string>
+    <string name="totWatts">Total Watts</string>
 </resources>

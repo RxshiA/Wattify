@@ -32,13 +32,13 @@ class HomeActivity : AppCompatActivity(){
             val intent = Intent(this, PlanHome::class.java)
             startActivity(intent)
         }
-//
-//        btnUsage.setOnClickListener {
-//            val intent = Intent(this, FetchingActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//
+
+        btnUsage.setOnClickListener {
+            val intent = Intent(this, Usage::class.java)
+            startActivity(intent)
+        }
+
+
 
 
         btnBillSum.setOnClickListener {
