@@ -108,13 +108,15 @@ class Usage : AppCompatActivity() {
 
                             intent.putExtra("devId", devList[position].devId)
                             intent.putExtra("devName", devList[position].devName)
+                            intent.putExtra("devWatts", devList[position].devWatts)
 
 
                             openUpdateDialog(
 
 
                                 intent.getStringExtra("devId").toString(),
-                                intent.getStringExtra("devName").toString()
+                                intent.getStringExtra("devName").toString(),
+                                intent.getStringExtra("devWatts").toString()
                             )
 
                             //val intent = Intent(this@Usage, DeviceDetailsActivity::class.java)
@@ -147,7 +149,8 @@ class Usage : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun openUpdateDialog(
         devId: String,
-        devName: String
+        devName: String,
+        devWatts : String,
     ) {
 
         val mDialog = AlertDialog.Builder(this)
@@ -187,10 +190,9 @@ class Usage : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val hrs = snapshot.child("hrs").getValue(String::class.java)
-                    val units = snapshot.child("units").getValue(String::class.java)
+//                    val units = snapshot.child("units").getValue(String::class.java)
 
                     etDevTime.setText(hrs, TextView.BufferType.EDITABLE)
-                    etDevWatts.setText(units, TextView.BufferType.EDITABLE)
                 }  else {
                     btnSaveData.setOnClickListener {
                         saveDeviceData(
@@ -209,6 +211,8 @@ class Usage : AppCompatActivity() {
                         alertDialog.dismiss()
                     }
                 }
+                etDevWatts.setText(devWatts)
+                etDevWatts.isEnabled = false
 
             }
 
