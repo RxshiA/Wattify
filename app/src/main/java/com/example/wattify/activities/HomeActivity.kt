@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity(){
         btnProfile = findViewById(R.id.btnProfile)
 
         btnDevices.setOnClickListener {
-            val intent = Intent(this, DevHomeActivity::class.java)
+            val intent = Intent(this, FetchingActivity::class.java)
             startActivity(intent)
         }
 
@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity(){
         }
 
         btnUsage.setOnClickListener {
-            val intent = Intent(this, FetchingActivity::class.java)
+            val intent = Intent(this, Usage::class.java)
             startActivity(intent)
         }
 
