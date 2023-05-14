@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ import com.example.wattify.R
 import com.example.wattify.adapters.DevAdapter
 import com.example.wattify.models.DeviceModel
 import com.example.wattify.models.UserDeviceModel
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -35,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
+import java.util.Locale
 
 class Usage : AppCompatActivity() {
 
@@ -44,6 +47,8 @@ class Usage : AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
     lateinit var toogle : ActionBarDrawerToggle
     private lateinit var totDaily : TextView
+    private lateinit var searchView: SearchView
+    private lateinit var searchList: ArrayList<DeviceModel>
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +60,12 @@ class Usage : AppCompatActivity() {
         val navView : NavigationView = findViewById(R.id.nav_view)
         val intent1 = Intent(this, HomeActivity::class.java)
         val intent2 = Intent(this, FetchingActivity::class.java)
-//        val intent3 = Intent(this, EditJobApplications::class.java)
-//        val intent4 = Intent(this, DeleteApplication::class.java)
+        val intent3 = Intent(this, FetchPlans::class.java)
+        val intent4 = Intent(this, ProfileActivity::class.java)
         val intent5 = Intent(this, LoginActivity::class.java)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         toogle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toogle)
         toogle.syncState()
@@ -70,8 +75,8 @@ class Usage : AppCompatActivity() {
             when(it.itemId){
                 R.id.nav_home -> startActivity(intent1)
                 R.id.nav_devices -> startActivity(intent2)
-//                R.id.nav_plan -> startActivity(intent3)
-//                R.id.nav_profile -> startActivity(intent4)
+                R.id.nav_plan -> startActivity(intent3)
+                R.id.nav_profile -> startActivity(intent4)
                 R.id.nav_logout -> startActivity(intent5)
             }
 
@@ -85,9 +90,37 @@ class Usage : AppCompatActivity() {
         tvLoadingData = findViewById(R.id.tvItem)
         totDaily = findViewById(R.id.totDaily)
 
+        searchList = arrayListOf<DeviceModel>()
+        searchView = findViewById(R.id.search)
         devList = arrayListOf<DeviceModel>()
 
         getDevicesData()
+
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchList.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()){
+                    devList.forEach{
+                        if (it.devName?.toLowerCase(Locale.getDefault())!!.contains(searchText)) {
+                            searchList.add(it)
+                        }
+                    }
+                    devRecyclerView.adapter!!.notifyDataSetChanged()
+                } else {
+                    searchList.clear()
+                    searchList.addAll(devList)
+                    devRecyclerView.adapter!!.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
 
         getDailyTotal()
 
