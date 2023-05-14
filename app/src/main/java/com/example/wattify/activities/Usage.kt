@@ -6,6 +6,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
+import android.text.Spanned
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
@@ -41,7 +43,9 @@ class Usage : AppCompatActivity() {
     private lateinit var devList: ArrayList<DeviceModel>
     private lateinit var dbRef: DatabaseReference
     lateinit var toogle : ActionBarDrawerToggle
+    private lateinit var totDaily : TextView
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usage)
@@ -79,12 +83,50 @@ class Usage : AppCompatActivity() {
         devRecyclerView.layoutManager = LinearLayoutManager(this)
         devRecyclerView.setHasFixedSize(true)
         tvLoadingData = findViewById(R.id.tvItem)
+        totDaily = findViewById(R.id.totDaily)
 
         devList = arrayListOf<DeviceModel>()
 
         getDevicesData()
 
+        getDailyTotal()
+
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getDailyTotal() {
+        val currentDate = LocalDate.now().toString()
+
+        val dbRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("UserDevices")
+
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var sum = 0
+                for (userSnapshot in dataSnapshot.children) {
+
+                        val date = userSnapshot.child("date").value?.toString()
+                        if (date == currentDate) {
+                            // Date matches, retrieve the corresponding data
+                            val data = userSnapshot.getValue(UserDeviceModel::class.java)
+                            // Handle the retrieved data
+
+                            if (data != null) {
+                                sum = sum + (data.hrs!!.toInt() * data.units!!.toInt())
+                            }
+                        }
+                }
+                totDaily.text = sum.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error retrieving data from database: $error")
+                Toast.makeText(applicationContext, "Error retrieving data from database", Toast.LENGTH_LONG).show()
+            }
+        })
+
+    }
+//Get all the corresponding devices
 
     private fun getDevicesData() {
 
@@ -121,20 +163,14 @@ class Usage : AppCompatActivity() {
                                 intent.getStringExtra("devWatts").toString()
                             )
 
-                            //val intent = Intent(this@Usage, DeviceDetailsActivity::class.java)
-
-
                             //put extras
                             intent.putExtra("devId", devList[position].devId)
                             intent.putExtra("devName", devList[position].devName)
                             intent.putExtra("devWatts", devList[position].devWatts)
                             intent.putExtra("devType", devList[position].devType)
-//                            startActivity(intent)
                         }
 
                     })
-
-
 
                     devRecyclerView.visibility = View.VISIBLE
                     tvLoadingData.visibility = View.GONE
@@ -147,6 +183,7 @@ class Usage : AppCompatActivity() {
 
         })
     }
+//Dialog Box
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun openUpdateDialog(
@@ -169,7 +206,27 @@ class Usage : AppCompatActivity() {
         val btnSaveData = mDialogView.findViewById<Button>(R.id.btnSaveData)
         val btnDeleteData = mDialogView.findViewById<Button>(R.id.btnDeleteData)
 
+        val maxHours = 24
+        val integerInputFilter = object : InputFilter {
+            override fun filter(
+                source: CharSequence?,
+                start: Int,
+                end: Int,
+                dest: Spanned?,
+                dstart: Int,
+                dend: Int
+            ): CharSequence? {
+                val inputValue = dest?.subSequence(0, dstart).toString() + source?.subSequence(start, end).toString() + dest?.subSequence(dend, dest.length).toString()
 
+                return if (inputValue.isEmpty() || inputValue.toIntOrNull() ?: 0 <= maxHours) {
+                    null
+                } else {
+                    ""
+                }
+            }
+        }
+
+        etDevTime.filters = arrayOf(integerInputFilter)
 
         mDialog.setTitle(" $devName ")
 
@@ -188,31 +245,29 @@ class Usage : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app")
         val myRef = database.getReference("UserDevices/$userDevId")
 
-
-
         class MyValueEventListener : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val hrs = snapshot.child("hrs").getValue(String::class.java)
-//                    val units = snapshot.child("units").getValue(String::class.java)
 
                     etDevTime.setText(hrs, TextView.BufferType.EDITABLE)
                 }  else {
                     btnSaveData.setOnClickListener {
-                        saveDeviceData(
-                            devId,
-                            etDevTime.text.toString(),
-                            etDevWatts.text.toString()
-                        )
+                        if (etDevTime.text.toString().isEmpty()) {
+                         etDevTime.error = "Please enter a value"
+                         }else{
+                            saveDeviceData(
+                                devId,
+                                etDevTime.text.toString(),
+                                etDevWatts.text.toString(),
+                                currentDate
+                            )
 
-                        Toast.makeText(applicationContext, "Device Data Saved", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, "Device Data Saved", Toast.LENGTH_LONG).show()
 
-//            //we are setting updated data to our textviews
-//            tvDevName.text = etDevName.text.toString()
-//            tvDevWatts.text = etDevWatts.text.toString()
-//            tvDevType.text = etDevType.text.toString()
+                            alertDialog.dismiss()
+                         }
 
-                        alertDialog.dismiss()
                     }
                 }
                 etDevWatts.setText(devWatts)
@@ -222,9 +277,6 @@ class Usage : AppCompatActivity() {
                     val totalWatts = etDevTime.text.toString().toInt() * etDevWatts.text.toString().toInt()
                     totWatts.text = Editable.Factory.getInstance().newEditable(totalWatts.toString())
                 }
-
-
-
 
                 etDevTime.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(
@@ -259,8 +311,6 @@ class Usage : AppCompatActivity() {
             }
         }
 
-
-
         val valueEventListener = MyValueEventListener()
         myRef.addValueEventListener(valueEventListener)
 ////////////////////////////////////////////////////////////////////////
@@ -268,15 +318,11 @@ class Usage : AppCompatActivity() {
             saveDeviceData(
                 devId,
                 etDevTime.text.toString(),
-                etDevWatts.text.toString()
+                etDevWatts.text.toString(),
+                currentDate
             )
 
             Toast.makeText(applicationContext, "Device Data Saved", Toast.LENGTH_LONG).show()
-
-//            //we are setting updated data to our textviews
-//            tvDevName.text = etDevName.text.toString()
-//            tvDevWatts.text = etDevWatts.text.toString()
-//            tvDevType.text = etDevType.text.toString()
 
             alertDialog.dismiss()
         }
@@ -287,30 +333,17 @@ class Usage : AppCompatActivity() {
     }
 
 
+//Save Function
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveDeviceData(
         id: String,
-         time: String,
-        watts: String) {
+        time: String,
+        watts: String,
+        date: String) {
 
-        //getting values
-//        val devName = etDevName.text.toString()
-//        val devWatts = etDevWatts.text.toString()
-//        val devType = etDevType.text.toString()
-
-//        if (devName.isEmpty()) {
-//            etDevName.error = "Please enter name"
-//        }
-//        if (devWatts.isEmpty()) {
-//            etDevWatts.error = "Please enter watts"
-//        }
-//        if (devType.isEmpty()) {
-//            etDevType.error = "Please enter type"
-//        }
         val databaseRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("UserDevices")
 
-//        val devId = databaseRef.push().key!!
         val user = Firebase.auth.currentUser
         var userDevId = " "
         val currentDate = LocalDate.now().toString()
@@ -318,23 +351,17 @@ class Usage : AppCompatActivity() {
              userDevId = it.uid + id + currentDate
         }
 
-
-        val userDev = UserDeviceModel(userDevId, time, watts, )
+        val userDev = UserDeviceModel(userDevId, time, watts,date )
 
         databaseRef.child(userDevId).setValue(userDev)
             .addOnCompleteListener {
                 Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
-
-//                etDevName.text.clear()
-//                etDevWatts.text.clear()
-//                etDevType.text.clear()
-
-
             }.addOnFailureListener { err ->
                 Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }
 
     }
+//Delete Function
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun deleteRecord(
@@ -350,7 +377,7 @@ class Usage : AppCompatActivity() {
         val mTask = dbRef.removeValue()
 
         mTask.addOnSuccessListener {
-            Toast.makeText(this, " Deleted", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, " Cleared", Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, Usage::class.java)
             finish()
