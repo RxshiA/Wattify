@@ -125,9 +125,19 @@ class PlanDetails : AppCompatActivity() {
         id: String,
         name: String,
     ) {
-        val dbRef = FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("X").child(id)
-        val planInfo = PlanModel(id, name)
-        dbRef.setValue(planInfo)
+
+        if(name.isEmpty()){
+
+            Toast.makeText(this, "Enter Plan Name", Toast.LENGTH_LONG).show()
+
+        }else {
+            val dbRef =
+                FirebaseDatabase.getInstance("https://wattify-ce140-default-rtdb.asia-southeast1.firebasedatabase.app")
+                    .getReference("X").child(id)
+            val planInfo = PlanModel(id, name)
+            dbRef.setValue(planInfo)
+
+        }
     }
 
 
