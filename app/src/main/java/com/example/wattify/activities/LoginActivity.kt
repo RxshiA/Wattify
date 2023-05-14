@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                         if (task.exception is FirebaseAuthInvalidUserException) {
                             Toast.makeText(this, "No such user exists", Toast.LENGTH_SHORT).show()
                         } else if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                            Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
                         }
