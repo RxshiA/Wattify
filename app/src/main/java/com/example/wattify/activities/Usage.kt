@@ -125,7 +125,7 @@ class Usage : AppCompatActivity() {
         getDailyTotal()
 
     }
-
+// calculate total for daily usage
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getDailyTotal() {
         val currentDate = LocalDate.now().toString()
@@ -197,10 +197,10 @@ class Usage : AppCompatActivity() {
                             )
 
                             //put extras
-                            intent.putExtra("devId", devList[position].devId)
-                            intent.putExtra("devName", devList[position].devName)
-                            intent.putExtra("devWatts", devList[position].devWatts)
-                            intent.putExtra("devType", devList[position].devType)
+//                            intent.putExtra("devId", devList[position].devId)
+//                            intent.putExtra("devName", devList[position].devName)
+//                            intent.putExtra("devWatts", devList[position].devWatts)
+//                            intent.putExtra("devType", devList[position].devType)
                         }
 
                     })
@@ -255,6 +255,7 @@ class Usage : AppCompatActivity() {
                     null
                 } else {
                     ""
+
                 }
             }
         }
@@ -267,7 +268,6 @@ class Usage : AppCompatActivity() {
 
         alertDialog.show()
 
-        ///////////////////////////////////////////////////////////////////////////////////
         val user = Firebase.auth.currentUser
         var userDevId = " "
         val currentDate = LocalDate.now().toString()
@@ -346,7 +346,6 @@ class Usage : AppCompatActivity() {
 
         val valueEventListener = MyValueEventListener()
         myRef.addValueEventListener(valueEventListener)
-////////////////////////////////////////////////////////////////////////
         btnSaveData.setOnClickListener {
             saveDeviceData(
                 devId,
