@@ -8,14 +8,17 @@
     android:padding="16dp"
     tools:context=".activities.addMyPlan">
 
+
+    <!-- Units section -->
+
     <EditText
         android:id="@+id/etPlanName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="84dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Enter name"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,11 +28,13 @@
         android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@color/white"
+        android:headerBackground="@drawable/background_gradient1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlanName"/>
-
-
+        app:layout_constraintTop_toBottomOf="@+id/etPlanName" />
 
     <Button
         android:id="@+id/btnSavePlan"

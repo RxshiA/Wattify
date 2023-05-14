@@ -22,7 +22,7 @@
         android:id="@+id/usergmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user@gmail.com"
+        android:text="rashi@gmail.com"
         android:textSize="16dp" />
 
 

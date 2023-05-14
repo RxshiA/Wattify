@@ -41,7 +41,7 @@ class FetchingActivity : AppCompatActivity() {
         val navView : NavigationView = findViewById(R.id.nav_view)
         val intent1 = Intent(this, HomeActivity::class.java)
         val intent2 = Intent(this, FetchingActivity::class.java)
-//        val intent3 = Intent(this, PlanHome::class.java)
+        val intent3 = Intent(this, FetchPlans::class.java)
         val intent4 = Intent(this, ProfileActivity::class.java)
         val intent5 = Intent(this, LoginActivity::class.java)
 
@@ -57,7 +57,7 @@ class FetchingActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.nav_home -> startActivity(intent1)
                 R.id.nav_devices -> startActivity(intent2)
-//                R.id.nav_plan -> startActivity(intent3)
+                R.id.nav_plan -> startActivity(intent3)
                 R.id.nav_profile -> startActivity(intent4)
                 R.id.nav_logout -> startActivity(intent5)
             }

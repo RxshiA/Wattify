@@ -47,19 +47,21 @@ class addMyPlan : AppCompatActivity() {
 
             etPlanName.error="Enter Plan name"
 
+        }else {
+
+            val planId = dbRef.push().key!!
+            val plan = PlanModel(planId, planName)
+
+            dbRef.child(planId).setValue(plan)
+                .addOnCompleteListener {
+                    Toast.makeText(this, "Plan Inserted Succesfully", Toast.LENGTH_LONG).show()
+                    etPlanName.text.clear()
+
+                }.addOnFailureListener { err ->
+                    Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
+                }
+
         }
-
-        val planId=  dbRef.push().key!!
-        val plan= PlanModel(planId,planName)
-
-        dbRef.child(planId).setValue(plan)
-            .addOnCompleteListener{
-                Toast.makeText(this,"Plan Inserted Succesfully",Toast.LENGTH_LONG).show()
-                etPlanName.text.clear()
-
-            }.addOnFailureListener{err->
-                Toast.makeText(this,"Error ${err.message}",Toast.LENGTH_LONG).show()
-            }
 
     }
 
