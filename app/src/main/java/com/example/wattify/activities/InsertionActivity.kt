@@ -47,28 +47,30 @@ class InsertionActivity : AppCompatActivity(){
         if (devName.isEmpty()) {
             etDevName.error = "Please enter name"
         }
-        if (devWatts.isEmpty()) {
+        else if (devWatts.isEmpty()) {
             etDevWatts.error = "Please enter watts"
         }
-        if (devType.isEmpty()) {
+        else if (devType.isEmpty()) {
             etDevType.error = "Please enter type"
         }
+        else{
+            val devId = dbRef.push().key!!
 
-        val devId = dbRef.push().key!!
+            val device = DeviceModel(devId, devName, devWatts, devType)
 
-        val device = DeviceModel(devId, devName, devWatts, devType)
+            dbRef.child(devId).setValue(device)
+                .addOnCompleteListener {
+                    Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
 
-        dbRef.child(devId).setValue(device)
-            .addOnCompleteListener {
-                Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, FetchingActivity::class.java)
+                    startActivity(intent)
+                    finish()
 
-                val intent = Intent(this, FetchingActivity::class.java)
-                startActivity(intent)
-                finish()
+                }.addOnFailureListener { err ->
+                    Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
+                }
+        }
 
-            }.addOnFailureListener { err ->
-                Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
-            }
 
     }
 }
